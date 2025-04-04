@@ -1,4 +1,31 @@
-<button onclick="filterCategory('All')">All</button>
-<button onclick="filterCategory('Toy')">Toy</button>
-<button onclick="filterCategory('Jewelry')">Jewelry</button>
-<button onclick="filterCategory('Shirt')">Shirt</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>POS System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>POS System</h1>
+
+  <!-- Category Buttons -->
+  <div id="categories">
+    <button onclick="filterCategory('All')">All</button>
+    <button onclick="filterCategory('Toy')">Toy</button>
+    <button onclick="filterCategory('Jewelry')">Jewelry</button>
+    <button onclick="filterCategory('Shirt')">Shirt</button>
+  </div>
+
+  <!-- Products -->
+  <div id="products"></div>
+
+  <!-- Cart -->
+  <h2>Cart</h2>
+  <ul id="cart"></ul>
+
+  <button onclick="checkout()">Checkout</button>
+
+  <script src="products.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
