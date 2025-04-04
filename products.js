@@ -9,4 +9,5 @@ const products = [
     name: "Gym Bracelet Black", 
     price: 1.25},
     image: "IMG_2464.jpeg"
+    }
 ];
