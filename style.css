@@ -1,27 +1,8 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 20px;
-  background: #f0f2f5;
-}
-
-#categories {
-  margin-bottom: 20px;
-}
-
-button {
-  margin: 5px;
-  padding: 10px;
-}
-
 .product {
-  border: 1px solid #ddd;
-  padding: 10px;
-  margin-bottom: 15px;
-  background: #fff;
-}
-
-.product img {
-  max-width: 100px;
-  display: block;
-  margin-bottom: 10px;
+  width: 30%;
+  margin: 1%;
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  box-sizing: border-box;
 }
