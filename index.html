@@ -1,31 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>POS System</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <h1>POS System</h1>
-
-  <!-- Category Buttons -->
-  <div id="categories">
-    <button onclick="filterCategory('All')">All</button>
-    <button onclick="filterCategory('Toy')">Toy</button>
-    <button onclick="filterCategory('Jewelry')">Jewelry</button>
-    <button onclick="filterCategory('Shirt')">Shirt</button>
+productDiv.innerHTML = `
+  <img src="${product.image}" alt="${product.name}" class="product-image">
+  <h3>${product.name}</h3>
+  <p>Price: $${product.price.toFixed(2)}</p>
+  <div class="quantity-selector">
+    <button onclick="decreaseQuantity(${product.id})">-</button>
+    <span id="quantity-${product.id}">1</span>
+    <button onclick="increaseQuantity(${product.id})">+</button>
   </div>
-
-  <!-- Products -->
-  <div id="products"></div>
-
-  <!-- Cart -->
-  <h2>Cart</h2>
-  <ul id="cart"></ul>
-
-  <button onclick="checkout()">Checkout</button>
-
-  <script src="products.js"></script>
-  <script src="script.js"></script>
-</body>
-</html>
+  <button onclick="addToCart(${product.id})">Add to Cart</button>
+`;
