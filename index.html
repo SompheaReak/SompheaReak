@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>POS System</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="products.js" defer></script>
-    <script src="script.js" defer></script>
+  <meta charset="UTF-8">
+  <title>POS System</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>POS System</h1>
-    <div id="product-list"></div>
-    <h2>Cart</h2>
-    <div id="cart"></div>
-    <button onclick="checkout()">Checkout</button>
+  <h1>POS System</h1>
+  <div id="products" class="product-container"></div>
+
+  <h2>Cart</h2>
+  <div id="cart"></div>
+
+  <button onclick="checkout()">Checkout</button>
+
+  <script src="products.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
