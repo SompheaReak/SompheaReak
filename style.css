@@ -1,8 +1,7 @@
-.product {
-  width: 30%;
-  margin: 3%;
-  display: inline-block;
-  vertical-align: top;
-  text-align: center;
-  box-sizing: border-box;
+.product-image {
+  width: 100%;
+  height: auto;
+  max-height: 150px; /* or 200px, depending how tall you want */
+  object-fit: contain;
+  margin-bottom: 10px;
 }
