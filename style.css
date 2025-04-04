@@ -1,17 +1,27 @@
-.product {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin: 10px;
-  display: inline-block;
-  width: 140px;
-  text-align: center;
-  box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
-  border-radius: 8px;
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background: #f0f2f5;
 }
 
-.product-image {
-  width: 100%;
-  height: auto;
+#categories {
+  margin-bottom: 20px;
+}
+
+button {
+  margin: 5px;
+  padding: 10px;
+}
+
+.product {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 15px;
+  background: #fff;
+}
+
+.product img {
+  max-width: 100px;
+  display: block;
   margin-bottom: 10px;
-  border-radius: 4px;
 }
