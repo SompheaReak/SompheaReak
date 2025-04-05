@@ -64,8 +64,27 @@ function addToCart(id) {
     const product = products.find(p => p.id === id);
     cart.push({ ...product, quantity: qty });
   }
+  localStorage.setItem('cart', JSON.stringify(cart)); // Important: Save cart!
   updateTotal();
-  alert(`${currentLanguage === 'kh' ? 'បានបន្ថែម' : 'Added'} ${qty} ${currentLanguage === 'kh' ? 'ទៅក្នុងកន្ត្រក' : 'to cart'}`);
+  showAddedToCartPopup(qty); // <-- call green popup here
+}
+function showAddedToCartPopup(qty) {
+  const popup = document.createElement('div');
+  popup.innerText = `✅ Added ${qty} item${qty > 1 ? 's' : ''} to cart!`;
+  popup.style.position = 'fixed';
+  popup.style.bottom = '20px';
+  popup.style.left = '50%';
+  popup.style.transform = 'translateX(-50%)';
+  popup.style.background = 'green';
+  popup.style.color = 'white';
+  popup.style.padding = '10px 20px';
+  popup.style.borderRadius = '8px';
+  popup.style.zIndex = '9999';
+  document.body.appendChild(popup);
+
+  setTimeout(() => {
+    popup.remove();
+  }, 2000);
 }
 
 function updateTotal() {
