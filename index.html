@@ -2,19 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>POS SompheaReak</title>
+  <title>SompheaReak</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1 id="title">Category</h1>
-
 <div class="settings">
   <button onclick="setColumns(2)">2 Columns</button>
   <button onclick="setColumns(3)">3 Columns</button>
-  <button onclick="setLanguage('en')">English🇬🇧</button>
-  <button onclick="setLanguage('kh')">ភាសាខ្មែរ🇰🇭</button>
+  <button onclick="setLanguage('en')">English 🇬🇧</button>
+  <button onclick="setLanguage('kh')">ភាសាខ្មែរ 🇰🇭</button>
 </div>
 
 <div class="category-buttons" id="categoryButtons"></div>
@@ -22,14 +20,16 @@
 <div class="products-container" id="products"></div>
 
 <div class="total" id="total">TOTAL: $0.00 / ៛0</div>
+
 <button id="finishOrder" onclick="showCheckout()">Finish Order</button>
 
 <!-- Checkout Modal -->
 <div id="checkoutModal" class="modal">
   <div class="modal-content">
-    <span class="close" onclick="hideCheckout()">&times;</span>
+    <span class="close" onclick="hideCheckout()">×</span>
     <h2>Checkout List</h2>
-    <div id="checkoutItems"></div>
+
+    <div id="checkoutItems" class="checkout-items"></div>
 
     <div class="customer-info">
       <input type="text" id="customerName" placeholder="Customer Name">
@@ -38,8 +38,8 @@
     </div>
 
     <div style="margin-top: 15px;">
-      <button onclick="confirmOrder()" class="confirm">✔ Confirm Order</button>
-      <button onclick="hideCheckout()" class="cancel">✖ Cancel</button>
+      <button onclick="confirmOrder()" class="confirm-button">✓ Confirm Order</button>
+      <button onclick="hideCheckout()" class="cancel-button">✖ Cancel</button>
     </div>
   </div>
 </div>
