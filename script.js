@@ -72,19 +72,21 @@ function showAddedToCartPopup(qty) {
   const popup = document.createElement('div');
   popup.innerText = `✅ Added ${qty} item${qty > 1 ? 's' : ''} to cart!`;
   popup.style.position = 'fixed';
-  popup.style.bottom = '20px';
+  popup.style.bottom = '100px'; // Higher up
   popup.style.left = '50%';
   popup.style.transform = 'translateX(-50%)';
-  popup.style.background = 'green';
+  popup.style.backgroundColor = 'green';
   popup.style.color = 'white';
-  popup.style.padding = '10px 20px';
-  popup.style.borderRadius = '8px';
-  popup.style.zIndex = '9999';
+  popup.style.padding = '15px 30px';
+  popup.style.fontSize = '24px'; // Bigger font
+  popup.style.borderRadius = '12px';
+  popup.style.zIndex = '10000';
+  popup.style.boxShadow = '0 2px 12px rgba(0, 0, 0, 0.5)';
   document.body.appendChild(popup);
 
   setTimeout(() => {
     popup.remove();
-  }, 2000);
+  }, 2500);
 }
 
 function updateTotal() {
