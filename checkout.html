@@ -30,12 +30,12 @@ const exchangeRate = 4000; // Exchange rate for KHR
 function renderCheckoutList() {
   const checkoutItems = document.getElementById('checkoutItems');
   checkoutItems.innerHTML = '';
-  
+
   cart.forEach(item => {
     const div = document.createElement('div');
     div.className = 'checkout-item';
     div.innerHTML = `
-      <img src="${item.image}" alt="${item.name}" width="60">
+      <img src="images/${item.image}" alt="${item.name}" width="60">
       <div style="flex: 1; margin-left: 10px;">
         <h4>${item.name}</h4>
         <p>Quantity: ${item.quantity}</p>
@@ -76,8 +76,8 @@ Date: ${new Date().toLocaleString()}
 }
 
 function sendOrderToTelegram(text) {
-  const botToken = "7743854740:AAHst9ZmDELrAcKChfcVpYpyGXF5sXTNSkY";
-  const chatId = "1098161879";
+  const botToken = "7743854740:AAHst9ZmDELrAcKChfcVpYpyGXF5sXTNSkY";  // your bot token
+  const chatId = "1098161879";  // your chat id
 
   fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
     method: "POST",
