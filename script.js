@@ -1,7 +1,47 @@
+const exchangeRate = 4000; // 1 USD = 4000 KHR
 const productsContainer = document.getElementById('products');
 const totalPriceElement = document.getElementById('totalPrice');
+const totalPriceKHRElement = document.getElementById('totalPriceKHR');
 const finishOrderButton = document.getElementById('finishOrder');
-const cart = {};
+const categoryButtonsContainer = document.getElementById('category-buttons');
+const categoryTitle = document.getElementById('categoryTitle');
+const totalLabel = document.getElementById('totalLabel');
+let currentLanguage = 'en';
+let cart = {};
+
+function setLanguage(lang) {
+  currentLanguage = lang;
+  displayCategories();
+  displayProducts();
+  updateLabels();
+}
+
+function setColumns(num) {
+  document.getElementById('products').style.gridTemplateColumns = `repeat(${num}, 1fr)`;
+}
+
+function updateLabels() {
+  if (currentLanguage === 'kh') {
+    categoryTitle.innerText = "ប្រភេទ";
+    totalLabel.innerText = "សរុប :";
+    finishOrderButton.innerText = "បញ្ចប់ការបញ្ជាទិញ";
+  } else {
+    categoryTitle.innerText = "CATEGORY";
+    totalLabel.innerText = "TOTAL :";
+    finishOrderButton.innerText = "Finish Order";
+  }
+}
+
+function displayCategories() {
+  const categories = ["All", ...new Set(products.map(p => p.category))];
+  categoryButtonsContainer.innerHTML = '';
+  categories.forEach(cat => {
+    const button = document.createElement('button');
+    button.innerText = cat;
+    button.onclick = () => displayProducts(cat);
+    categoryButtonsContainer.appendChild(button);
+  });
+}
 
 function displayProducts(filterCategory = 'All') {
   productsContainer.innerHTML = '';
@@ -12,39 +52,34 @@ function displayProducts(filterCategory = 'All') {
     const productDiv = document.createElement('div');
     productDiv.classList.add('product');
 
+    const priceInKHR = (product.price * exchangeRate).toLocaleString();
+
     productDiv.innerHTML = `
-      <div class="img-wrapper">
-        <div class="loading">Loading...</div>
-        <img src="${product.image}" alt="${product.name}" onload="this.previousElementSibling.style.display='none'">
-      </div>
+      <img src="${product.image}" alt="${product.name}">
       <h3>${product.name}</h3>
-      <p>Price: $${product.price.toFixed(2)}</p>
+      <p>${currentLanguage === 'kh' ? 'តម្លៃ' : 'Price'}: $${product.price.toFixed(2)} / ៛${priceInKHR}</p>
       <div class="quantity-selector">
         <button onclick="changeQuantity(${product.id}, -1)">-</button>
         <span id="quantity-${product.id}">1</span>
         <button onclick="changeQuantity(${product.id}, 1)">+</button>
       </div>
-      <button onclick="addToCart(${product.id}, this)">Add to Cart</button>
+      <button onclick="addToCart(${product.id})">${currentLanguage === 'kh' ? 'បន្ថែម' : 'Add to Cart'}</button>
     `;
 
     productsContainer.appendChild(productDiv);
   });
 }
 
-function filterProducts(category) {
-  displayProducts(category);
-}
-
 function changeQuantity(productId, change) {
   const quantityElement = document.getElementById(`quantity-${productId}`);
   if (!quantityElement) return;
-  
+
   let quantity = parseInt(quantityElement.innerText);
   quantity = Math.max(1, quantity + change);
   quantityElement.innerText = quantity;
 }
 
-function addToCart(productId, buttonElement) {
+function addToCart(productId) {
   const quantityElement = document.getElementById(`quantity-${productId}`);
   if (!quantityElement) return;
 
@@ -57,14 +92,6 @@ function addToCart(productId, buttonElement) {
 
   cart[productId].quantity += quantity;
   updateTotal();
-
-  // Small animation
-  buttonElement.innerText = "Added!";
-  buttonElement.disabled = true;
-  setTimeout(() => {
-    buttonElement.innerText = "Add to Cart";
-    buttonElement.disabled = false;
-  }, 1000);
 }
 
 function updateTotal() {
@@ -73,46 +100,37 @@ function updateTotal() {
     total += cart[id].price * cart[id].quantity;
   }
   totalPriceElement.innerText = total.toFixed(2);
+  totalPriceKHRElement.innerText = (total * exchangeRate).toLocaleString();
 }
 
 finishOrderButton.addEventListener('click', () => {
   if (Object.keys(cart).length === 0) {
-    alert("Cart is empty. Please add products!");
+    alert(currentLanguage === 'kh' ? "សូមបន្ថែមផលិតផលជាមុន!" : "Cart is empty!");
     return;
   }
 
-  const customerName = prompt("សូមបញ្ចូលឈ្មោះអតិថិជន (Enter Customer Name):");
-  if (!customerName) {
-    alert("You must enter a customer name.");
+  const customerName = prompt(currentLanguage === 'kh' ? "សូមបញ្ចូលឈ្មោះអតិថិជន" : "Enter Customer Name:");
+  const phoneNumber = prompt(currentLanguage === 'kh' ? "សូមបញ្ចូលលេខទូរស័ព្ទ" : "Enter Phone Number:");
+
+  if (!customerName || !phoneNumber) {
+    alert(currentLanguage === 'kh' ? "សូមបញ្ចូលឈ្មោះ និង លេខទូរស័ព្ទ!" : "Name and Phone required!");
     return;
   }
 
-  let orderSummary = `New Order!\nអតិថិជន (Customer): ${customerName}\n`;
-
-  const now = new Date();
-  const formattedDate = now.getFullYear() + "-" + (now.getMonth()+1).toString().padStart(2,'0') + "-" + now.getDate().toString().padStart(2,'0') +
-                        " " + now.getHours().toString().padStart(2,'0') + ":" + now.getMinutes().toString().padStart(2,'0');
-  orderSummary += `Date: ${formattedDate}\n\nItems:\n`;
-
+  let orderSummary = `New Order!\nអតិថិជន: ${customerName}\nលេខទូរស័ព្ទ: ${phoneNumber}\n\nรายการទិញ / Items:\n`;
   for (const id in cart) {
     orderSummary += `- ${cart[id].name} x ${cart[id].quantity}\n`;
   }
+  orderSummary += `\nសរុប / Total: $${totalPriceElement.innerText} / ៛${totalPriceKHRElement.innerText}`;
 
-  orderSummary += `\nTotal: $${totalPriceElement.innerText}`;
-
-  const confirmSend = confirm("តើអ្នកចង់ផ្ញើការបញ្ជាទិញនេះទៅ Telegram ដែរឬទេ? (Send order?)");
-  if (confirmSend) {
-    sendTelegramMessage(orderSummary);
-    alert("✅ Order sent successfully!");
-    clearCart();
-    displayProducts();
-  }
+  sendTelegramMessage(orderSummary);
+  alert("✅ Order Sent!");
+  clearCart();
+  displayProducts();
 });
 
 function clearCart() {
-  for (const id in cart) {
-    delete cart[id];
-  }
+  cart = {};
   updateTotal();
 }
 
@@ -127,22 +145,7 @@ function sendTelegramMessage(message) {
     .catch(error => console.error('Error sending message:', error));
 }
 
-// Load all products initially
+// Initial Load
+displayCategories();
 displayProducts();
-const exchangeRate = 4000; // 1 USD = 4000 KHR
-
-products.forEach(product => {
-    const productDiv = document.createElement('div');
-    productDiv.classList.add('product');
-
-    const priceInKHR = (product.price * exchangeRate).toLocaleString(); // ៛ format with commas
-
-    productDiv.innerHTML = `
-        <img src="${product.image}" alt="${product.name}" class="product-image">
-        <h3>${product.name}</h3>
-        <p>Price: $${product.price.toFixed(2)} / ៛${priceInKHR}</p>
-        <button onclick="addToCart(${product.id})">Add to Cart</button>
-    `;
-
-    productsContainer.appendChild(productDiv);
-});
+updateLabels();
