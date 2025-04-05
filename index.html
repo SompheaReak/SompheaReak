@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SompheaReak POS</title>
+  <title>POS SompheaReak</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1 id="title">Category: Jewelry Toy Food Fruit</h1>
+<h1 id="title">Category</h1>
 
 <div class="settings">
   <button onclick="setColumns(2)">2 Columns</button>
@@ -30,6 +30,13 @@
     <span class="close" onclick="hideCheckout()">&times;</span>
     <h2>Checkout List</h2>
     <div id="checkoutItems"></div>
+
+    <div class="customer-info">
+      <input type="text" id="customerName" placeholder="Customer Name">
+      <input type="text" id="customerPhone" placeholder="Phone Number">
+      <input type="text" id="customerAddress" placeholder="Address">
+    </div>
+
     <div style="margin-top: 15px;">
       <button onclick="confirmOrder()" class="confirm">✔ Confirm Order</button>
       <button onclick="hideCheckout()" class="cancel">✖ Cancel</button>
