@@ -2,47 +2,43 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>POS System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SompheaReak POS</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="settings">
-    <button onclick="setLanguage('en')">English</button>
-    <button onclick="setLanguage('kh')">Khmer</button>
-    <button onclick="setColumns(2)">2 Columns</button>
-    <button onclick="setColumns(3)">3 Columns</button>
-  </div>
+<h1 id="title">Category: Jewelry Toy Food Fruit</h1>
 
-  <div id="cartCounter" class="cart-counter">🛒 Cart: 0 Items</div>
+<div class="settings">
+  <button onclick="setColumns(2)">2 Columns</button>
+  <button onclick="setColumns(3)">3 Columns</button>
+  <button onclick="setLanguage('en')">English</button>
+  <button onclick="setLanguage('kh')">ភាសាខ្មែរ</button>
+</div>
 
-  <h1 id="categoryTitle">CATEGORY</h1>
+<div class="category-buttons" id="categoryButtons"></div>
 
-  <div id="category-buttons" class="category-buttons"></div>
+<div class="products-container" id="products"></div>
 
-  <div id="products" class="products-container"></div>
+<div class="total" id="total">TOTAL: $0.00 / ៛0</div>
+<button id="finishOrder" onclick="showCheckout()">Finish Order</button>
 
-  <div class="total">
-    <span id="totalLabel">TOTAL :</span> $<span id="totalPrice">0.00</span> / ៛<span id="totalPriceKHR">0</span>
-  </div>
-
-  <button id="finishOrder" style="display:none;">Finish Order</button>
-
-  <!-- Checkout Modal -->
-  <div id="checkoutModal" class="checkout-modal">
-    <div class="checkout-content">
-      <span class="close-button" onclick="closeCheckout()">❌</span>
-      <h2>Checkout List</h2>
-      <div id="checkoutItems"></div>
-      <div class="checkout-buttons">
-        <button onclick="confirmCheckout()">✅ Confirm Order</button>
-        <button onclick="closeCheckout()">❌ Cancel</button>
-      </div>
+<!-- Checkout Modal -->
+<div id="checkoutModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="hideCheckout()">&times;</span>
+    <h2>Checkout List</h2>
+    <div id="checkoutItems"></div>
+    <div style="margin-top: 15px;">
+      <button onclick="confirmOrder()" class="confirm">✔ Confirm Order</button>
+      <button onclick="hideCheckout()" class="cancel">✖ Cancel</button>
     </div>
   </div>
+</div>
 
-  <script src="products.js"></script>
-  <script src="script.js"></script>
+<script src="products.js"></script>
+<script src="script.js"></script>
 
 </body>
 </html>
