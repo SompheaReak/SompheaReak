@@ -24,8 +24,9 @@
 </div>
 
 <script>
+// Read cart from localStorage
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
-const exchangeRate = 4000; // Exchange rate for KHR
+const exchangeRate = 4000; // Exchange rate KHR
 
 function renderCheckoutList() {
   const checkoutItems = document.getElementById('checkoutItems');
@@ -35,7 +36,7 @@ function renderCheckoutList() {
     const div = document.createElement('div');
     div.className = 'checkout-item';
     div.innerHTML = `
-      <img src="images/${item.image}" alt="${item.name}" width="60">
+      <img src="${item.image}" alt="${item.name}" width="60">
       <div style="flex: 1; margin-left: 10px;">
         <h4>${item.name}</h4>
         <p>Quantity: ${item.quantity}</p>
@@ -72,12 +73,12 @@ Date: ${new Date().toLocaleString()}
   sendOrderToTelegram(orderText);
   alert("✅ Order Sent Successfully!");
   localStorage.removeItem('cart');
-  window.location.href = "index.html";
+  window.location.href = "index.html"; // Back to homepage
 }
 
 function sendOrderToTelegram(text) {
-  const botToken = "7743854740:AAHst9ZmDELrAcKChfcVpYpyGXF5sXTNSkY";  // your bot token
-  const chatId = "1098161879";  // your chat id
+  const botToken = "7743854740:AAHst9ZmDELrAcKChfcVpYpyGXF5sXTNSkY";  // <-- Your Bot Token
+  const chatId = "1098161879";  // <-- Your Chat ID
 
   fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
     method: "POST",
@@ -90,7 +91,7 @@ function cancelOrder() {
   window.location.href = "index.html";
 }
 
-// Call render when page loads
+// Initialize on page load
 renderCheckoutList();
 </script>
 
