@@ -12,7 +12,7 @@ body {
 .settings button {
   padding: 10px 20px;
   margin: 5px;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .category-buttons {
@@ -46,13 +46,13 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 5px 0;
+  margin: 10px 0;
 }
 
 .quantity-selector button {
-  width: 40px;
-  height: 40px;
-  font-size: 20px;
+  width: 80px;
+  height: 80px;
+  font-size: 30px;
 }
 
 .quantity-selector span {
