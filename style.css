@@ -98,13 +98,11 @@ body {
 }
 
 .modal-content {
-  background: white;
-  margin: auto;
+  max-height: 80vh; /* Make modal scrollable */
+  overflow-y: auto;
   padding: 20px;
-  border-radius: 12px;
-  width: 90%;
-  max-width: 500px;
-  position: relative;
+  background: white;
+  border-radius: 10px;
 }
 
 .close {
