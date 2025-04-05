@@ -98,7 +98,7 @@ body {
 }
 
 .modal-content {
-  max-height: 80vh; /* Make modal scrollable */
+  max-height: 90vh;
   overflow-y: auto;
   padding: 20px;
   background: white;
