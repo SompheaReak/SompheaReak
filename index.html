@@ -6,20 +6,22 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>CATEGORY : JEWELRY TOY FOOD FRUIT</h1>
 
-  <div id="category-buttons">
-    <button onclick="filterProducts('All')">All</button>
-    <button onclick="filterProducts('Jewelry')">Jewelry</button>
-    <button onclick="filterProducts('Toy')">Toy</button>
-    <button onclick="filterProducts('Food')">Food</button>
-    <button onclick="filterProducts('Fruit')">Fruit</button>
+  <div class="settings">
+    <button onclick="setLanguage('en')">English</button>
+    <button onclick="setLanguage('kh')">Khmer</button>
+    <button onclick="setColumns(2)">2 Columns</button>
+    <button onclick="setColumns(3)">3 Columns</button>
   </div>
+
+  <h1 id="categoryTitle">CATEGORY</h1>
+
+  <div id="category-buttons" class="category-buttons"></div>
 
   <div id="products" class="products-container"></div>
 
   <div class="total">
-    TOTAL : $<span id="totalPrice">0.00</span>
+    <span id="totalLabel">TOTAL :</span> $<span id="totalPrice">0.00</span> / ៛<span id="totalPriceKHR">0</span>
   </div>
 
   <button id="finishOrder">Finish Order</button>
