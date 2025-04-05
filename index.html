@@ -26,7 +26,21 @@
 
   <button id="finishOrder">Finish Order</button>
 
+  <!-- Checkout Modal -->
+  <div id="checkoutModal" class="checkout-modal">
+    <div class="checkout-content">
+      <span class="close-button" onclick="closeCheckout()">❌</span>
+      <h2>Checkout List</h2>
+      <div id="checkoutItems"></div>
+      <div class="checkout-buttons">
+        <button onclick="confirmCheckout()">✅ Confirm Order</button>
+        <button onclick="closeCheckout()">❌ Cancel</button>
+      </div>
+    </div>
+  </div>
+
   <script src="products.js"></script>
   <script src="script.js"></script>
+
 </body>
 </html>
