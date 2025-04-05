@@ -1,26 +1,28 @@
 body {
-  font-family: 'Arial Black', sans-serif;
-  text-align: center;
-  background: white;
+  font-family: 'Arial', sans-serif;
+  background-color: #f5f5f5;
   padding: 10px;
+  margin: 0;
 }
 
 .settings {
+  text-align: center;
   margin-bottom: 20px;
 }
 
 .settings button {
-  padding: 12px 24px;
   margin: 5px;
-  font-size: 20px;
-  border-radius: 10px;
-  background: #f0f0f0;
-  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
   font-weight: bold;
+  border-radius: 8px;
+  border: none;
+  background-color: #ddd;
   cursor: pointer;
 }
 
 .category-buttons {
+  text-align: center;
   margin-bottom: 20px;
 }
 
@@ -29,23 +31,25 @@ body {
   padding: 10px 20px;
   font-size: 18px;
   border-radius: 8px;
-  background: #e0e0e0;
   border: none;
-  font-weight: bold;
+  background-color: #eee;
   cursor: pointer;
+  font-weight: bold;
 }
 
 .products-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 15px;
+  padding: 10px;
 }
 
 .product {
-  border: 2px solid black;
-  padding: 10px;
+  background-color: white;
   border-radius: 10px;
-  background: white;
+  padding: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-align: center;
 }
 
 .product img {
@@ -55,12 +59,12 @@ body {
 }
 
 .product h3 {
-  font-size: 20px;
+  font-size: 18px;
   margin: 10px 0 5px 0;
 }
 
 .product p {
-  font-size: 18px;
+  font-size: 16px;
   margin: 5px 0 10px 0;
 }
 
@@ -68,142 +72,88 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px 0;
+  margin-bottom: 10px;
 }
 
 .quantity-selector button {
-  width: 50px;
-  height: 50px;
-  font-size: 26px;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
   font-weight: bold;
-  border-radius: 8px;
+  border-radius: 6px;
   border: none;
-  background-color: #ddd;
+  background-color: #ccc;
   cursor: pointer;
 }
 
 .quantity-selector span {
   margin: 0 10px;
-  font-size: 22px;
-  font-weight: bold;
+  font-size: 20px;
 }
 
 .add-cart {
+  width: 100%;
   background-color: green;
   color: white;
-  font-size: 22px;
-  padding: 15px 20px;
-  margin-top: 10px;
-  width: 100%;
+  font-size: 20px;
+  padding: 10px;
+  border-radius: 8px;
   border: none;
-  border-radius: 10px;
-  font-weight: bold;
   cursor: pointer;
+  margin-top: 5px;
+}
+
+.out-of-stock {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
 }
 
 .total {
   margin-top: 20px;
-  font-size: 30px;
+  text-align: center;
+  font-size: 24px;
   font-weight: bold;
-  text-align: center; /* This line centers the TOTAL text */
 }
 
 #finishOrder {
-  margin-top: 15px;
+  display: block;
+  width: 90%;
+  margin: 20px auto 0;
   padding: 15px;
-  font-size: 26px;
+  font-size: 22px;
   background-color: darkgreen;
   color: white;
   border: none;
   border-radius: 8px;
+  cursor: pointer;
+}
+
+.confirm-button, .cancel-button {
   width: 100%;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-/* Modal Scroll and Layout Fix */
-.modal-content {
-  max-height: 80vh;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 20px;
-  background: white;
-  border-radius: 10px;
-}
-
-/* Modal Close button */
-.close {
-  float: right;
-  font-size: 32px;
-  cursor: pointer;
-}
-
-/* Checkout list item */
-.checkout-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 12px;
-}
-
-.checkout-item img {
-  width: 60px;
-  height: auto;
-  margin-right: 10px;
-  border-radius: 8px;
-}
-
-.checkout-controls {
-  display: flex;
-  align-items: center;
-  margin-top: 5px;
-}
-
-.checkout-controls button {
-  width: 40px;
-  height: 40px;
-  margin: 0 5px;
+  padding: 15px;
   font-size: 20px;
-  font-weight: bold;
-  border-radius: 8px;
-  background-color: #ddd;
+  margin-top: 10px;
   border: none;
+  border-radius: 8px;
   cursor: pointer;
 }
 
 .confirm-button {
-  margin-top: 20px;
-  padding: 15px;
-  width: 100%;
   background-color: green;
   color: white;
-  border: none;
-  font-size: 22px;
-  font-weight: bold;
-  border-radius: 8px;
 }
 
 .cancel-button {
-  margin-top: 10px;
-  padding: 15px;
-  width: 100%;
   background-color: red;
   color: white;
-  border: none;
-  font-size: 22px;
-  font-weight: bold;
-  border-radius: 8px;
-}
-
-.customer-info {
-  margin-top: 20px;
 }
 
 .customer-info input {
-  display: block;
   width: 100%;
-  margin-bottom: 10px;
   padding: 15px;
+  margin-bottom: 10px;
   font-size: 18px;
-  border-radius: 8px;
   border: 1px solid #ccc;
+  border-radius: 8px;
 }
