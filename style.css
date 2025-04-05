@@ -159,3 +159,10 @@ body {
   border: none;
   border-radius: 8px;
 }
+.checkout-popup {
+  max-height: 80vh; /* 80% of screen height */
+  overflow-y: auto; /* scroll if too long */
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+}
