@@ -183,5 +183,6 @@ function translatePrice(price) {
 }
 
 // Initialize
+setColumns(3); 
 renderCategories();
 renderProducts();
