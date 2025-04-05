@@ -84,19 +84,14 @@ body {
   font-weight: bold;
 }
 
-/* Checkout Modal */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 10;
-  padding-top: 80px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.7);
+.modal-content {
+  max-height: 80vh;   /* Smaller so it fits keyboard too */
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
 }
-
 .modal-content {
   max-height: 90vh;
   overflow-y: auto;
