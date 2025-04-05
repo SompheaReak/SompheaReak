@@ -1,1 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+<div class="products-container">
+  <div class="product">
+    <img src="images/IMG_2464.jpeg" alt="Bracelet 1">
+    <h3>Bracelet 1</h3>
+    <p>Price: $5.00 / 20,000 KHR</p>
+    <div class="quantity-selector">
+      <button onclick="updateQuantity('bracelet1', -1)">-</button>
+      <span id="bracelet1">1</span>
+      <button onclick="updateQuantity('bracelet1', 1)">+</button>
+    </div>
+    <button onclick="addToCart('bracelet1', 5.00, 'Bracelet 1')">Add to Cart</button>
+  </div>
+
+  <div class="product">
+    <img src="images/IMG_2460.jpeg" alt="Bracelet 2">
+    <h3>Bracelet 2</h3>
+    <p>Price: $5.00 / 20,000 KHR</p>
+    <div class="quantity-selector">
+      <button onclick="updateQuantity('bracelet2', -1)">-</button>
+      <span id="bracelet2">1</span>
+      <button onclick="updateQuantity('bracelet2', 1)">+</button>
+    </div>
+    <button onclick="addToCart('bracelet2', 5.00, 'Bracelet 2')">Add to Cart</button>
+  </div>
+
+  <!-- Add more products here -->
+
+</div>
+
+<div id="cart-summary">
+  <button onclick="checkout()">Checkout</button>
+  <div id="cart-items"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
