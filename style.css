@@ -5,15 +5,33 @@ body {
   padding: 10px;
 }
 
-.settings, .category-buttons {
+.settings {
   margin-bottom: 20px;
 }
 
-.settings button, .category-buttons button {
-  padding: 12px 20px;
+.settings button {
+  padding: 12px 24px;
   margin: 5px;
+  font-size: 20px;
+  border-radius: 10px;
+  background: #f0f0f0;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.category-buttons {
+  margin-bottom: 20px;
+}
+
+.category-buttons button {
+  margin: 5px;
+  padding: 10px 20px;
   font-size: 18px;
   border-radius: 8px;
+  background: #e0e0e0;
+  border: none;
+  font-weight: bold;
   cursor: pointer;
 }
 
@@ -27,12 +45,23 @@ body {
   border: 2px solid black;
   padding: 10px;
   border-radius: 10px;
+  background: white;
 }
 
 .product img {
   width: 100%;
   height: auto;
-  border-radius: 10px;
+  border-radius: 8px;
+}
+
+.product h3 {
+  font-size: 20px;
+  margin: 10px 0 5px 0;
+}
+
+.product p {
+  font-size: 18px;
+  margin: 5px 0 10px 0;
 }
 
 .quantity-selector {
@@ -45,47 +74,55 @@ body {
 .quantity-selector button {
   width: 50px;
   height: 50px;
-  font-size: 24px;
+  font-size: 26px;
+  font-weight: bold;
+  border-radius: 8px;
+  border: none;
+  background-color: #ddd;
+  cursor: pointer;
 }
 
 .quantity-selector span {
   margin: 0 10px;
-  font-size: 24px;
+  font-size: 22px;
+  font-weight: bold;
 }
 
 .add-cart {
-  margin-top: 10px;
-  width: 100%;
-  padding: 14px;
-  font-size: 22px;
   background-color: green;
   color: white;
+  font-size: 22px;
+  padding: 15px 20px;
+  margin-top: 10px;
+  width: 100%;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   font-weight: bold;
   cursor: pointer;
 }
 
 .total {
   margin-top: 20px;
-  font-size: 32px;
+  font-size: 28px;
   font-weight: bold;
 }
 
 #finishOrder {
   margin-top: 15px;
-  padding: 18px;
+  padding: 15px;
   font-size: 26px;
-  background-color: green;
+  background-color: darkgreen;
   color: white;
   border: none;
   border-radius: 8px;
   width: 100%;
   font-weight: bold;
+  cursor: pointer;
 }
 
+/* Modal Scroll and Layout Fix */
 .modal-content {
-  max-height: 80vh;   /* Smaller so it fits keyboard too */
+  max-height: 80vh;
   overflow-y: auto;
   overflow-x: hidden;
   padding: 20px;
@@ -93,12 +130,14 @@ body {
   border-radius: 10px;
 }
 
+/* Modal Close button */
 .close {
   float: right;
   font-size: 32px;
   cursor: pointer;
 }
 
+/* Checkout list item */
 .checkout-item {
   display: flex;
   align-items: center;
@@ -107,48 +146,63 @@ body {
 
 .checkout-item img {
   width: 60px;
-  height: 60px;
+  height: auto;
   margin-right: 10px;
   border-radius: 8px;
+}
+
+.checkout-controls {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
 }
 
 .checkout-controls button {
+  width: 40px;
+  height: 40px;
   margin: 0 5px;
   font-size: 20px;
-  padding: 5px;
+  font-weight: bold;
+  border-radius: 8px;
+  background-color: #ddd;
+  border: none;
+  cursor: pointer;
+}
+
+.confirm-button {
+  margin-top: 20px;
+  padding: 15px;
+  width: 100%;
+  background-color: green;
+  color: white;
+  border: none;
+  font-size: 22px;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+.cancel-button {
+  margin-top: 10px;
+  padding: 15px;
+  width: 100%;
+  background-color: red;
+  color: white;
+  border: none;
+  font-size: 22px;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+.customer-info {
+  margin-top: 20px;
 }
 
 .customer-info input {
-  width: 90%;
-  padding: 12px;
-  margin-top: 10px;
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 15px;
   font-size: 18px;
-  border: 2px solid black;
   border-radius: 8px;
-}
-
-.confirm {
-  background-color: green;
-  color: white;
-  padding: 12px 25px;
-  font-size: 20px;
-  margin-right: 10px;
-  border: none;
-  border-radius: 8px;
-}
-
-.cancel {
-  background-color: red;
-  color: white;
-  padding: 12px 25px;
-  font-size: 20px;
-  border: none;
-  border-radius: 8px;
-}
-.checkout-popup {
-  max-height: 80vh; /* 80% of screen height */
-  overflow-y: auto; /* scroll if too long */
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
+  border: 1px solid #ccc;
 }
