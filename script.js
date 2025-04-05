@@ -9,7 +9,35 @@ let cart = [];
 let currentLanguage = 'en';
 let currentCategory = 'All';
 let exchangeRate = 4000;
-let columns = 2;
+let columns = window.innerWidth < 600 ? 2 : 3; // 2 columns if screen < 600px, otherwise 3
+
+function renderProducts() {
+  productsContainer.innerHTML = '';
+  const filteredProducts = currentCategory === 'All' ? products : products.filter(p => p.category === currentCategory);
+
+  filteredProducts.forEach(product => {
+    const div = document.createElement('div');
+    div.className = 'product';
+    div.innerHTML = `
+      <img src="${product.image}" alt="${product.name}">
+      <h3>${product.name}</h3>
+      <p>${translatePrice(product.price)}</p>
+      <div class="quantity-selector">
+        <button onclick="changeQuantity(${product.id}, -1)">-</button>
+        <span id="qty-${product.id}">1</span>
+        <button onclick="changeQuantity(${product.id}, 1)">+</button>
+      </div>
+      <button class="add-cart" onclick="addToCart(${product.id})">🛒 ${currentLanguage === 'kh' ? 'បន្ថែម' : 'Add to Cart'}</button>
+    `;
+    productsContainer.appendChild(div);
+  });
+
+  productsContainer.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
+}
+window.addEventListener('resize', () => {
+  columns = window.innerWidth < 600 ? 2 : 3;
+  renderProducts();
+});
 
 function renderProducts() {
   productsContainer.innerHTML = '';
