@@ -1,21 +1,22 @@
 body {
   font-family: 'Arial Black', sans-serif;
-  background: #fff;
   text-align: center;
+  background: white;
   padding: 10px;
+  margin: 0;
 }
 
 .settings button, .category-buttons button {
-  margin: 5px;
   padding: 10px 20px;
+  margin: 5px;
   font-size: 18px;
+  border-radius: 6px;
 }
 
 .products-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr); /* Default 2 columns */
   gap: 15px;
-  margin-top: 20px;
 }
 
 .product {
@@ -31,6 +32,9 @@ body {
 }
 
 .quantity-selector {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 10px 0;
 }
 
@@ -40,70 +44,94 @@ body {
   font-size: 24px;
 }
 
-.add-cart {
-  background-color: green;
-  color: white;
-  font-size: 18px;
-  border: none;
-  border-radius: 6px;
-  padding: 10px;
-  margin-top: 10px;
-  width: 100%;
+.quantity-selector span {
+  margin: 0 10px;
+  font-size: 20px;
 }
 
 .total {
   margin-top: 20px;
-  font-size: 24px;
+  font-size: 26px;
   font-weight: bold;
 }
 
 #finishOrder {
-  background-color: darkgreen;
-  color: white;
+  margin-top: 15px;
   padding: 15px;
-  font-size: 22px;
+  font-size: 24px;
+  background-color: green;
+  color: white;
   border: none;
   border-radius: 8px;
+  width: 100%;
+}
+
+.add-cart {
+  background-color: green;
+  color: white;
+  padding: 12px 20px;
+  font-size: 20px;
+  border: none;
+  border-radius: 6px;
   margin-top: 10px;
-  width: 90%;
+}
+
+.checkout-items {
+  margin: 20px 0;
 }
 
 .checkout-item {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .checkout-item img {
   width: 60px;
-  margin-right: 10px;
+  height: 60px;
+  border-radius: 8px;
+}
+
+.checkout-controls {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.checkout-controls button {
+  padding: 5px 10px;
+  margin: 0 3px;
+}
+
+.customer-info {
+  margin-top: 20px;
 }
 
 .customer-info input {
+  display: block;
   width: 90%;
-  margin: 10px 0;
-  padding: 12px;
-  font-size: 16px;
+  margin: 10px auto;
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 6px;
+  border: 1px solid gray;
 }
 
 .confirm-button {
-  background: green;
+  background-color: green;
   color: white;
-  padding: 15px;
-  width: 80%;
+  padding: 12px 20px;
   font-size: 20px;
-  margin-top: 10px;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
 }
 
 .cancel-button {
-  background: red;
+  background-color: red;
   color: white;
-  padding: 15px;
-  width: 80%;
+  padding: 12px 20px;
   font-size: 20px;
-  margin-top: 10px;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
+  margin-left: 10px;
 }
