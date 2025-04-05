@@ -9,7 +9,7 @@ let cart = [];
 let currentLanguage = 'en';
 let currentCategory = 'All';
 let exchangeRate = 4000;
-let columns = 3;
+let columns = 2;
 
 function renderProducts() {
   productsContainer.innerHTML = '';
