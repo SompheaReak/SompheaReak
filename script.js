@@ -6,36 +6,27 @@ let cart = [];
 let currentLanguage = 'en';
 let currentCategory = 'All';
 let exchangeRate = 4000;
-let columns = 2;
+let columns = 2; // Default to 2 columns
 
 function renderProducts() {
   productsContainer.innerHTML = '';
-  const filtered = currentCategory === 'All' ? products : products.filter(p => p.category === currentCategory);
+  const filteredProducts = currentCategory === 'All' ? products : products.filter(p => p.category === currentCategory);
 
-  filtered.forEach(product => {
+  filteredProducts.forEach(product => {
     const div = document.createElement('div');
     div.className = 'product';
     div.innerHTML = `
-  <img src="${product.image}" alt="${product.name}">
-  <h3>${product.name}</h3>
-  <p>${translatePrice(product.price)}</p>
-  <div class="quantity-selector">
-    <button onclick="changeQuantity(${product.id}, -1)">-</button>
-    <span id="qty-${product.id}">1</span>
-    <button onclick="changeQuantity(${product.id}, 1)">+</button>
-  </div>
-  ${
-    product.InStock 
-    ? `<button class="add-cart" onclick="addToCart(${product.id})">🛒 ${currentLanguage === 'kh' ? 'បន្ថែម' : 'Add to Cart'}</button>`
-    : `<button class="out-of-stock" disabled>❌ ${currentLanguage === 'kh' ? 'អស់ពីស្តុក' : 'Out of Stock'}</button>`
-  }
-`;
+      <img src="${product.image}" alt="${product.name}">
+      <h3>${product.name}</h3>
+      <p>${translatePrice(product.price)}</p>
+      ${product.InStock ? `
+      <div class="quantity-selector">
         <button onclick="changeQuantity(${product.id}, -1)">-</button>
         <span id="qty-${product.id}">1</span>
         <button onclick="changeQuantity(${product.id}, 1)">+</button>
       </div>
       <button class="add-cart" onclick="addToCart(${product.id})">🛒 ${currentLanguage === 'kh' ? 'បន្ថែម' : 'Add to Cart'}</button>
-      ` : `<p style="color:red;">Out of Stock</p>`}
+      ` : `<p style="color:red;">${currentLanguage === 'kh' ? 'អស់ពីស្តុក' : 'Out of Stock'}</p>`}
     `;
     productsContainer.appendChild(div);
   });
@@ -49,30 +40,32 @@ function renderCategories() {
   categories.forEach(cat => {
     const btn = document.createElement('button');
     btn.innerText = cat;
-    btn.onclick = () => { currentCategory = cat; renderProducts(); };
+    btn.onclick = () => {
+      currentCategory = cat;
+      renderProducts();
+    };
     categoryButtons.appendChild(btn);
   });
 }
 
 function changeQuantity(id, change) {
-  const qty = document.getElementById(`qty-${id}`);
-  let value = parseInt(qty.innerText) + change;
-  if (value < 1) value = 1;
-  qty.innerText = value;
+  const qtySpan = document.getElementById(`qty-${id}`);
+  let qty = parseInt(qtySpan.innerText) + change;
+  if (qty < 1) qty = 1;
+  qtySpan.innerText = qty;
 }
 
 function addToCart(id) {
   const qty = parseInt(document.getElementById(`qty-${id}`).innerText);
-  const product = products.find(p => p.id === id);
-  const existing = cart.find(c => c.id === id);
+  const existing = cart.find(item => item.id === id);
   if (existing) {
     existing.quantity += qty;
   } else {
+    const product = products.find(p => p.id === id);
     cart.push({ ...product, quantity: qty });
   }
-  localStorage.setItem('cart', JSON.stringify(cart));
-  alert(currentLanguage === 'kh' ? "បានបន្ថែមទៅក្នុងកន្ត្រក!" : "Added to cart!");
   updateTotal();
+  alert(`${currentLanguage === 'kh' ? 'បានបន្ថែម' : 'Added'} ${qty} ${currentLanguage === 'kh' ? 'ទៅក្នុងកន្ត្រក' : 'to cart'}`);
 }
 
 function updateTotal() {
@@ -89,6 +82,7 @@ function setColumns(num) {
 function setLanguage(lang) {
   currentLanguage = lang;
   renderProducts();
+  renderCategories();
 }
 
 function translatePrice(price) {
@@ -97,7 +91,6 @@ function translatePrice(price) {
     : `តម្លៃ: $${price.toFixed(2)} / ៛${(price * exchangeRate).toLocaleString()}`;
 }
 
-// Init
+// Initialize
 renderCategories();
 renderProducts();
-updateTotal();
