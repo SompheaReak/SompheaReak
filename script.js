@@ -149,3 +149,71 @@ function sendTelegramMessage(message) {
 displayCategories();
 displayProducts();
 updateLabels();
+function openCheckout() {
+  const checkoutModal = document.getElementById('checkoutModal');
+  const checkoutItems = document.getElementById('checkoutItems');
+  checkoutItems.innerHTML = '';
+
+  for (const id in cart) {
+    const item = cart[id];
+    checkoutItems.innerHTML += `
+      <div>
+        ${item.name} x ${item.quantity}
+        <button onclick="changeCartQuantity(${item.id}, -1)">-</button>
+        <button onclick="changeCartQuantity(${item.id}, 1)">+</button>
+        <button onclick="removeCartItem(${item.id})">Remove</button>
+      </div>
+    `;
+  }
+
+  checkoutModal.style.display = 'flex';
+}
+
+function closeCheckout() {
+  document.getElementById('checkoutModal').style.display = 'none';
+}
+
+function changeCartQuantity(productId, change) {
+  if (cart[productId]) {
+    cart[productId].quantity += change;
+    if (cart[productId].quantity <= 0) {
+      delete cart[productId];
+    }
+    updateTotal();
+    openCheckout();
+  }
+}
+
+function removeCartItem(productId) {
+  if (cart[productId]) {
+    delete cart[productId];
+    updateTotal();
+    openCheckout();
+  }
+}
+
+function confirmCheckout() {
+  closeCheckout();
+  proceedOrder();
+}
+
+function proceedOrder() {
+  const customerName = prompt("Enter Customer Name:");
+  const phoneNumber = prompt("Enter Phone Number:");
+
+  if (!customerName || !phoneNumber) {
+    alert("Name and Phone required!");
+    return;
+  }
+
+  let orderSummary = `New Order!\nCustomer: ${customerName}\nPhone: ${phoneNumber}\n\nItems:\n`;
+  for (const id in cart) {
+    orderSummary += `- ${cart[id].name} x ${cart[id].quantity}\n`;
+  }
+  orderSummary += `\nTotal: $${totalPriceElement.innerText} / ៛${totalPriceKHRElement.innerText}`;
+
+  sendTelegramMessage(orderSummary);
+  alert("✅ Order Sent!");
+  clearCart();
+  displayProducts();
+}
