@@ -2,17 +2,17 @@ const productsContainer = document.getElementById('products');
 const categoryButtons = document.getElementById('categoryButtons');
 const totalDisplay = document.getElementById('total');
 
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
+let cart = [];
 let currentLanguage = 'en';
 let currentCategory = 'All';
 let exchangeRate = 4000;
-let columns = window.innerWidth < 600 ? 2 : 3;
+let columns = 2;
 
 function renderProducts() {
   productsContainer.innerHTML = '';
-  const filteredProducts = currentCategory === 'All' ? products : products.filter(p => p.category === currentCategory);
+  const filtered = currentCategory === 'All' ? products : products.filter(p => p.category === currentCategory);
 
-  filteredProducts.forEach(product => {
+  filtered.forEach(product => {
     const div = document.createElement('div');
     div.className = 'product';
     div.innerHTML = `
@@ -25,19 +25,14 @@ function renderProducts() {
         <span id="qty-${product.id}">1</span>
         <button onclick="changeQuantity(${product.id}, 1)">+</button>
       </div>
-      <button class="add-cart" onclick="addToCart(${product.id})">🛒 ${currentLanguage === 'kh' ? 'បន្ថែម' : 'Add to Cart'}</button>` 
-      : `<div class="out-of-stock">${currentLanguage === 'kh' ? 'អស់ពីស្តុក' : 'Out of Stock'}</div>`}
+      <button class="add-cart" onclick="addToCart(${product.id})">🛒 ${currentLanguage === 'kh' ? 'បន្ថែម' : 'Add to Cart'}</button>
+      ` : `<p style="color:red;">Out of Stock</p>`}
     `;
     productsContainer.appendChild(div);
   });
 
   productsContainer.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
 }
-
-window.addEventListener('resize', () => {
-  columns = window.innerWidth < 600 ? 2 : 3;
-  renderProducts();
-});
 
 function renderCategories() {
   const categories = ['All', ...new Set(products.map(p => p.category))];
@@ -51,25 +46,23 @@ function renderCategories() {
 }
 
 function changeQuantity(id, change) {
-  const qtySpan = document.getElementById(`qty-${id}`);
-  let qty = parseInt(qtySpan.innerText) + change;
-  if (qty < 1) qty = 1;
-  qtySpan.innerText = qty;
+  const qty = document.getElementById(`qty-${id}`);
+  let value = parseInt(qty.innerText) + change;
+  if (value < 1) value = 1;
+  qty.innerText = value;
 }
 
 function addToCart(id) {
   const qty = parseInt(document.getElementById(`qty-${id}`).innerText);
   const product = products.find(p => p.id === id);
-  const existing = cart.find(item => item.id === id);
-
+  const existing = cart.find(c => c.id === id);
   if (existing) {
     existing.quantity += qty;
   } else {
     cart.push({ ...product, quantity: qty });
   }
-
   localStorage.setItem('cart', JSON.stringify(cart));
-  alert(`Added ${qty} × ${product.name} to cart!`);
+  alert(currentLanguage === 'kh' ? "បានបន្ថែមទៅក្នុងកន្ត្រក!" : "Added to cart!");
   updateTotal();
 }
 
@@ -86,16 +79,16 @@ function setColumns(num) {
 
 function setLanguage(lang) {
   currentLanguage = lang;
-  document.getElementById('title').innerText = lang === 'en' ? "Hot Sale | Jewelry | Toy" : "លក់ដាច់ | គ្រឿងអលង្ការ | ប្រដាប់ប្រដាក្មេង";
   renderProducts();
 }
 
 function translatePrice(price) {
-  return currentLanguage === 'en' ? `Price: $${price.toFixed(2)} / ៛${(price * exchangeRate).toLocaleString()}` :
-    `តម្លៃ: $${price.toFixed(2)} / ៛${(price * exchangeRate).toLocaleString()}`;
+  return currentLanguage === 'en'
+    ? `Price: $${price.toFixed(2)} / ៛${(price * exchangeRate).toLocaleString()}`
+    : `តម្លៃ: $${price.toFixed(2)} / ៛${(price * exchangeRate).toLocaleString()}`;
 }
 
-// Start
+// Init
 renderCategories();
 renderProducts();
 updateTotal();
