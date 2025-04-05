@@ -72,21 +72,21 @@ function showAddedToCartPopup(qty) {
   const popup = document.createElement('div');
   popup.innerText = `✅ Added ${qty} item${qty > 1 ? 's' : ''} to cart!`;
   popup.style.position = 'fixed';
-  popup.style.bottom = '100px'; // Higher up
-  popup.style.left = '50%';
-  popup.style.transform = 'translateX(-50%)';
+  popup.style.top = '0'; /* Top of screen */
+  popup.style.left = '0';
+  popup.style.right = '0';
   popup.style.backgroundColor = 'green';
   popup.style.color = 'white';
-  popup.style.padding = '15px 30px';
-  popup.style.fontSize = '24px'; // Bigger font
-  popup.style.borderRadius = '12px';
+  popup.style.padding = '15px';
+  popup.style.fontSize = '22px';
+  popup.style.textAlign = 'center';
   popup.style.zIndex = '10000';
-  popup.style.boxShadow = '0 2px 12px rgba(0, 0, 0, 0.5)';
+  popup.style.boxShadow = '0 2px 6px rgba(0,0,0,0.5)';
   document.body.appendChild(popup);
 
   setTimeout(() => {
     popup.remove();
-  }, 2500);
+  }, 2500); // 2.5 seconds disappear
 }
 
 function updateTotal() {
