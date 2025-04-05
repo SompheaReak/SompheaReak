@@ -1,22 +1,29 @@
 body {
   font-family: 'Arial Black', sans-serif;
-  text-align: center;
   background: white;
+  text-align: center;
   padding: 10px;
-  margin: 0;
+}
+
+h1.title {
+  font-size: 28px;
+  margin-bottom: 20px;
 }
 
 .settings button, .category-buttons button {
   padding: 10px 20px;
   margin: 5px;
   font-size: 18px;
-  border-radius: 6px;
+  border-radius: 8px;
+  border: none;
+  background-color: #007BFF;
+  color: white;
 }
 
 .products-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Default 2 columns */
   gap: 15px;
+  margin-top: 20px;
 }
 
 .product {
@@ -41,97 +48,39 @@ body {
 .quantity-selector button {
   width: 40px;
   height: 40px;
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .quantity-selector span {
   margin: 0 10px;
-  font-size: 20px;
-}
-
-.total {
-  margin-top: 20px;
-  font-size: 26px;
-  font-weight: bold;
-}
-
-#finishOrder {
-  margin-top: 15px;
-  padding: 15px;
-  font-size: 24px;
-  background-color: green;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  width: 100%;
+  font-size: 18px;
 }
 
 .add-cart {
   background-color: green;
   color: white;
-  padding: 12px 20px;
-  font-size: 20px;
-  border: none;
-  border-radius: 6px;
-  margin-top: 10px;
-}
-
-.checkout-items {
-  margin: 20px 0;
-}
-
-.checkout-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.checkout-item img {
-  width: 60px;
-  height: 60px;
-  border-radius: 8px;
-}
-
-.checkout-controls {
-  display: flex;
-  align-items: center;
-  margin-top: 8px;
-}
-
-.checkout-controls button {
-  padding: 5px 10px;
-  margin: 0 3px;
-}
-
-.customer-info {
-  margin-top: 20px;
-}
-
-.customer-info input {
-  display: block;
-  width: 90%;
-  margin: 10px auto;
-  padding: 10px;
   font-size: 18px;
-  border-radius: 6px;
-  border: 1px solid gray;
+  padding: 10px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+  width: 100%;
 }
 
-.confirm-button {
-  background-color: green;
-  color: white;
-  padding: 12px 20px;
-  font-size: 20px;
-  border: none;
-  border-radius: 6px;
+.total {
+  margin-top: 20px;
+  font-size: 24px;
+  font-weight: bold;
 }
 
-.cancel-button {
-  background-color: red;
+button:disabled, .out-of-stock {
+  background-color: gray !important;
   color: white;
-  padding: 12px 20px;
-  font-size: 20px;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 10px;
+  margin-top: 10px;
   border: none;
-  border-radius: 6px;
-  margin-left: 10px;
+  border-radius: 8px;
+  width: 100%;
 }
