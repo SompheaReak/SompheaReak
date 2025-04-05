@@ -3,6 +3,7 @@ const categoryButtons = document.getElementById('categoryButtons');
 const totalDisplay = document.getElementById('total');
 const checkoutModal = document.getElementById('checkoutModal');
 const checkoutItems = document.getElementById('checkoutItems');
+const finishOrderButton = document.getElementById('finishOrder');
 
 let cart = [];
 let currentLanguage = 'en';
@@ -26,7 +27,7 @@ function renderProducts() {
         <span id="qty-${product.id}">1</span>
         <button onclick="changeQuantity(${product.id}, 1)">+</button>
       </div>
-      <button class="add-cart" onclick="addToCart(${product.id})">Add to Cart</button>
+      <button class="add-cart" onclick="addToCart(${product.id})">🛒 ${currentLanguage === 'kh' ? 'បន្ថែម' : 'Add to Cart'}</button>
     `;
     productsContainer.appendChild(div);
   });
@@ -121,18 +122,41 @@ function removeCheckout(id) {
 }
 
 function confirmOrder() {
-  const orderText = cart.map(item => `${item.name} x${item.quantity}`).join('\n') +
-    `\nTotal: $${cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2)}`;
+  const name = document.getElementById('customerName').value.trim();
+  const phone = document.getElementById('customerPhone').value.trim();
+  const address = document.getElementById('customerAddress').value.trim();
+
+  if (!name || !phone || !address) {
+    alert(currentLanguage === 'kh' ? "សូមបំពេញពត៌មានអតិថិជន" : "Please fill customer info!");
+    return;
+  }
+
+  const orderText = `
+New Order Received!
+--------------------
+Customer: ${name}
+Phone: ${phone}
+Address: ${address}
+--------------------
+Items:
+${cart.map(item => `- ${item.name} x${item.quantity}`).join('\n')}
+--------------------
+Total: $${cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2)} / ៛${(cart.reduce((sum, item) => sum + item.price * item.quantity, 0) * exchangeRate).toLocaleString()}
+Date: ${new Date().toLocaleString()}
+`;
+
   sendOrderToTelegram(orderText);
+  alert("✅ Order sent successfully!");
   cart = [];
   hideCheckout();
   updateTotal();
-  alert('Order placed successfully!');
+  renderProducts();
 }
 
 function sendOrderToTelegram(text) {
-  const botToken = "YOUR_BOT_TOKEN"; // <-- your bot token
-  const chatId = "YOUR_CHAT_ID";      // <-- your chat id
+  const botToken = "7743854740:AAHst9ZmDELrAcKChfcVpYpyGXF5sXTNSkY"; // Your Bot Token
+  const chatId = "1098161879"; // Your Chat ID
+
   const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
 
   fetch(url, {
@@ -149,7 +173,7 @@ function setColumns(num) {
 
 function setLanguage(lang) {
   currentLanguage = lang;
-  document.getElementById('title').innerText = lang === 'en' ? "Category: Jewelry Toy Food Fruit" : "ប្រភេទ: គ្រឿងអលង្ការ ក្មេងលេង ម្ហូប ផ្លែឈើ";
+  document.getElementById('title').innerText = lang === 'en' ? "Category" : "ប្រភេទ";
   renderProducts();
 }
 
