@@ -92,13 +92,6 @@ body {
   background: white;
   border-radius: 10px;
 }
-.modal-content {
-  max-height: 90vh;
-  overflow-y: auto;
-  padding: 20px;
-  background: white;
-  border-radius: 10px;
-}
 
 .close {
   float: right;
