@@ -2,31 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Checkout - SompheaReak</title>
+  <title>Checkout</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1 class="title" style="text-align: center;">Checkout</h1>
+<h1>Checkout</h1>
 
-<div id="checkoutItems" class="products-container"></div>
+<div id="checkoutItems"></div>
 
-<div class="customer-info" style="margin-top: 20px; text-align: center;">
-  <input type="text" id="customerName" placeholder="Customer Name" style="width: 90%; padding: 10px; margin: 5px;">
-  <input type="text" id="customerPhone" placeholder="Phone Number" style="width: 90%; padding: 10px; margin: 5px;">
-  <input type="text" id="customerAddress" placeholder="Address" style="width: 90%; padding: 10px; margin: 5px;">
+<div class="customer-info">
+  <input type="text" id="customerName" placeholder="Name">
+  <input type="text" id="customerPhone" placeholder="Phone">
+  <input type="text" id="customerAddress" placeholder="Address">
 </div>
 
-<div style="margin-top: 20px; text-align: center;">
-  <button onclick="confirmOrder()" class="add-cart" style="padding: 10px 20px;">✓ Confirm Order</button>
-  <button onclick="cancelOrder()" class="out-of-stock" style="padding: 10px 20px;">✖ Cancel</button>
+<div>
+  <button onclick="confirmOrder()">Confirm Order</button>
+  <button onclick="cancelOrder()">Cancel</button>
 </div>
 
 <script>
-// Read cart from localStorage
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
-const exchangeRate = 4000; // Exchange rate KHR
 
 function renderCheckoutList() {
   const checkoutItems = document.getElementById('checkoutItems');
@@ -36,48 +34,40 @@ function renderCheckoutList() {
     const div = document.createElement('div');
     div.className = 'checkout-item';
     div.innerHTML = `
-      <img src="${item.image}" alt="${item.name}" width="60">
-      <div style="flex: 1; margin-left: 10px;">
-        <h4>${item.name}</h4>
-        <p>Quantity: ${item.quantity}</p>
-      </div>
+      <p>${item.name} x${item.quantity} - $${item.price * item.quantity}</p>
     `;
     checkoutItems.appendChild(div);
   });
 }
 
 function confirmOrder() {
-  const name = document.getElementById('customerName').value.trim();
-  const phone = document.getElementById('customerPhone').value.trim();
-  const address = document.getElementById('customerAddress').value.trim();
+  const name = document.getElementById('customerName').value;
+  const phone = document.getElementById('customerPhone').value;
+  const address = document.getElementById('customerAddress').value;
 
   if (!name || !phone || !address) {
-    alert("Please fill all customer information!");
+    alert("Please fill out all fields.");
     return;
   }
 
-  const orderText = `
-New Order!
-----------
-Customer: ${name}
-Phone: ${phone}
-Address: ${address}
-----------
-Items:
-${cart.map(item => `- ${item.name} x${item.quantity}`).join('\n')}
-----------
-Total: $${cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2)} / ៛${(cart.reduce((sum, item) => sum + item.price * item.quantity, 0) * exchangeRate).toLocaleString()}
-Date: ${new Date().toLocaleString()}
-`;
+  const orderText = `New Order:
+    Name: ${name}
+    Phone: ${phone}
+    Address: ${address}
+    Items:
+    ${cart.map(item => `${item.name} x${item.quantity}`).join('\n')}
+    Total: $${cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2)}
+  `;
 
   sendOrderToTelegram(orderText);
-  alert("✅ Order Sent Successfully!");
+  alert("Order confirmed!");
   localStorage.removeItem('cart');
-  window.location.href = "/";
+  window.location.href = "index.html";
+}
 
 function sendOrderToTelegram(text) {
-  const botToken = "7743854740:AAHst9ZmDELrAcKChfcVpYpyGXF5sXTNSkY";  // <-- Your Bot Token
-  const chatId = "1098161879";  // <-- Your Chat ID
+  const botToken = "YOUR_BOT_TOKEN";
+  const chatId = "YOUR_CHAT_ID";
 
   fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
     method: "POST",
@@ -90,7 +80,6 @@ function cancelOrder() {
   window.location.href = "index.html";
 }
 
-// Initialize on page load
 renderCheckoutList();
 </script>
 
