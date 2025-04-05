@@ -1,86 +1,29 @@
 body {
-  font-family: 'Arial Black', sans-serif;
-  background: white;
+  font-family: Arial, sans-serif;
   text-align: center;
+  padding: 20px;
+}
+
+input {
+  width: 80%;
   padding: 10px;
-}
-
-h1.title {
-  font-size: 28px;
-  margin-bottom: 20px;
-}
-
-.settings button, .category-buttons button {
-  padding: 10px 20px;
-  margin: 5px;
-  font-size: 18px;
-  border-radius: 8px;
-  border: none;
-  background-color: #007BFF;
-  color: white;
-}
-
-.products-container {
-  display: grid;
-  gap: 15px;
-  margin-top: 20px;
-}
-
-.product {
-  border: 2px solid black;
-  padding: 10px;
-  border-radius: 8px;
-}
-
-.product img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-}
-
-.quantity-selector {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   margin: 10px 0;
 }
 
-.quantity-selector button {
-  width: 40px;
-  height: 40px;
-  font-size: 20px;
-}
-
-.quantity-selector span {
-  margin: 0 10px;
-  font-size: 18px;
-}
-
-.add-cart {
-  background-color: green;
+button {
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+  background-color: #28a745;
   color: white;
-  font-size: 18px;
-  padding: 10px;
-  margin-top: 10px;
   border: none;
-  border-radius: 8px;
-  width: 100%;
+  border-radius: 5px;
 }
 
-.total {
-  margin-top: 20px;
-  font-size: 24px;
-  font-weight: bold;
+button:hover {
+  background-color: #218838;
 }
 
-button:disabled, .out-of-stock {
-  background-color: gray !important;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  padding: 10px;
-  margin-top: 10px;
-  border: none;
-  border-radius: 8px;
-  width: 100%;
+.checkout-item {
+  margin-bottom: 10px;
 }
