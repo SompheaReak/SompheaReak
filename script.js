@@ -4,6 +4,7 @@ const totalPriceElement = document.getElementById('totalPrice');
 const totalPriceKHRElement = document.getElementById('totalPriceKHR');
 const finishOrderButton = document.getElementById('finishOrder');
 const categoryButtonsContainer = document.getElementById('category-buttons');
+const cartCounter = document.getElementById('cartCounter');
 const categoryTitle = document.getElementById('categoryTitle');
 const totalLabel = document.getElementById('totalLabel');
 let currentLanguage = 'en';
@@ -59,11 +60,11 @@ function displayProducts(filterCategory = 'All') {
       <h3>${product.name}</h3>
       <p>${currentLanguage === 'kh' ? 'តម្លៃ' : 'Price'}: $${product.price.toFixed(2)} / ៛${priceInKHR}</p>
       <div class="quantity-selector">
-        <button onclick="changeQuantity(${product.id}, -1)">-</button>
+        <button onclick="changeQuantity(${product.id}, -1)">➖</button>
         <span id="quantity-${product.id}">1</span>
-        <button onclick="changeQuantity(${product.id}, 1)">+</button>
+        <button onclick="changeQuantity(${product.id}, 1)">➕</button>
       </div>
-      <button onclick="addToCart(${product.id})">${currentLanguage === 'kh' ? 'បន្ថែម' : 'Add to Cart'}</button>
+      <button class="add-to-cart-btn" onclick="addToCart(${product.id})">🛒 ${currentLanguage === 'kh' ? 'បន្ថែម' : 'Add to Cart'}</button>
     `;
 
     productsContainer.appendChild(productDiv);
@@ -96,11 +97,23 @@ function addToCart(productId) {
 
 function updateTotal() {
   let total = 0;
+  let itemCount = 0;
+
   for (const id in cart) {
     total += cart[id].price * cart[id].quantity;
+    itemCount += cart[id].quantity;
   }
+
   totalPriceElement.innerText = total.toFixed(2);
   totalPriceKHRElement.innerText = (total * exchangeRate).toLocaleString();
+
+  cartCounter.innerHTML = `🛒 Cart: ${itemCount} Item${itemCount !== 1 ? 's' : ''}`;
+
+  if (itemCount === 0) {
+    finishOrderButton.style.display = 'none';
+  } else {
+    finishOrderButton.style.display = 'block';
+  }
 }
 
 finishOrderButton.addEventListener('click', () => {
@@ -108,62 +121,28 @@ finishOrderButton.addEventListener('click', () => {
     alert(currentLanguage === 'kh' ? "សូមបន្ថែមផលិតផលជាមុន!" : "Cart is empty!");
     return;
   }
-
-  const customerName = prompt(currentLanguage === 'kh' ? "សូមបញ្ចូលឈ្មោះអតិថិជន" : "Enter Customer Name:");
-  const phoneNumber = prompt(currentLanguage === 'kh' ? "សូមបញ្ចូលលេខទូរស័ព្ទ" : "Enter Phone Number:");
-
-  if (!customerName || !phoneNumber) {
-    alert(currentLanguage === 'kh' ? "សូមបញ្ចូលឈ្មោះ និង លេខទូរស័ព្ទ!" : "Name and Phone required!");
-    return;
-  }
-
-  let orderSummary = `New Order!\nអតិថិជន: ${customerName}\nលេខទូរស័ព្ទ: ${phoneNumber}\n\nรายการទិញ / Items:\n`;
-  for (const id in cart) {
-    orderSummary += `- ${cart[id].name} x ${cart[id].quantity}\n`;
-  }
-  orderSummary += `\nសរុប / Total: $${totalPriceElement.innerText} / ៛${totalPriceKHRElement.innerText}`;
-
-  sendTelegramMessage(orderSummary);
-  alert("✅ Order Sent!");
-  clearCart();
-  displayProducts();
+  openCheckout();
 });
 
-function clearCart() {
-  cart = {};
-  updateTotal();
-}
-
-function sendTelegramMessage(message) {
-  const botToken = '7743854740:AAHst9ZmDELrAcKChfcVpYpyGXF5sXTNSkY';
-  const chatId = '1098161879';
-  const text = encodeURIComponent(message);
-
-  fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${text}`)
-    .then(response => response.json())
-    .then(data => console.log('Message sent:', data))
-    .catch(error => console.error('Error sending message:', error));
-}
-
-// Initial Load
-displayCategories();
-displayProducts();
-updateLabels();
 function openCheckout() {
   const checkoutModal = document.getElementById('checkoutModal');
   const checkoutItems = document.getElementById('checkoutItems');
   checkoutItems.innerHTML = '';
 
-  for (const id in cart) {
-    const item = cart[id];
-    checkoutItems.innerHTML += `
-      <div>
-        ${item.name} x ${item.quantity}
-        <button onclick="changeCartQuantity(${item.id}, -1)">-</button>
-        <button onclick="changeCartQuantity(${item.id}, 1)">+</button>
-        <button onclick="removeCartItem(${item.id})">Remove</button>
-      </div>
-    `;
+  if (Object.keys(cart).length === 0) {
+    checkoutItems.innerHTML = '<p>Your cart is empty!</p>';
+  } else {
+    for (const id in cart) {
+      const item = cart[id];
+      checkoutItems.innerHTML += `
+        <div>
+          ${item.name} x ${item.quantity}
+          <button onclick="changeCartQuantity(${item.id}, -1)">➖</button>
+          <button onclick="changeCartQuantity(${item.id}, 1)">➕</button>
+          <button onclick="removeCartItem(${item.id})">🗑️</button>
+        </div>
+      `;
+    }
   }
 
   checkoutModal.style.display = 'flex';
@@ -198,22 +177,51 @@ function confirmCheckout() {
 }
 
 function proceedOrder() {
-  const customerName = prompt("Enter Customer Name:");
-  const phoneNumber = prompt("Enter Phone Number:");
+  const customerName = prompt(currentLanguage === 'kh' ? "សូមបញ្ចូលឈ្មោះអតិថិជន" : "Enter Customer Name:");
+  const phoneNumber = prompt(currentLanguage === 'kh' ? "សូមបញ្ចូលលេខទូរស័ព្ទ" : "Enter Phone Number:");
 
   if (!customerName || !phoneNumber) {
-    alert("Name and Phone required!");
+    alert(currentLanguage === 'kh' ? "សូមបញ្ចូលឈ្មោះ និង លេខទូរស័ព្ទ!" : "Name and Phone required!");
     return;
   }
 
-  let orderSummary = `New Order!\nCustomer: ${customerName}\nPhone: ${phoneNumber}\n\nItems:\n`;
+  let orderSummary = `New Order Received!\n------------------------\n`;
+  orderSummary += `Customer: ${customerName}\nPhone: ${phoneNumber}\n------------------------\nItems:\n`;
+
   for (const id in cart) {
     orderSummary += `- ${cart[id].name} x ${cart[id].quantity}\n`;
   }
-  orderSummary += `\nTotal: $${totalPriceElement.innerText} / ៛${totalPriceKHRElement.innerText}`;
+
+  orderSummary += `------------------------\n`;
+  orderSummary += `Total: $${totalPriceElement.innerText} / ៛${totalPriceKHRElement.innerText}\n`;
+
+  const now = new Date();
+  const date = now.getFullYear() + "-" + (now.getMonth() + 1).toString().padStart(2, '0') + "-" + now.getDate().toString().padStart(2, '0') + " " + now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
+  orderSummary += `Date: ${date}`;
 
   sendTelegramMessage(orderSummary);
   alert("✅ Order Sent!");
   clearCart();
   displayProducts();
 }
+
+function clearCart() {
+  cart = {};
+  updateTotal();
+}
+
+function sendTelegramMessage(message) {
+  const botToken = 'YOUR_BOT_TOKEN';
+  const chatId = 'YOUR_CHAT_ID';
+  const text = encodeURIComponent(message);
+
+  fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${text}`)
+    .then(response => response.json())
+    .then(data => console.log('Message sent:', data))
+    .catch(error => console.error('Error sending message:', error));
+}
+
+// Initial load
+displayCategories();
+displayProducts();
+updateLabels();
