@@ -90,6 +90,7 @@ function addToCart(id) {
     const product = products.find(p => p.id === id);
     cart.push({ ...product, quantity: qty });
   }
+  localStorage.setItem('cart', JSON.stringify(cart)); // Save cart
   updateTotal();
 }
 
