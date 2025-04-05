@@ -16,11 +16,20 @@ function renderProducts() {
     const div = document.createElement('div');
     div.className = 'product';
     div.innerHTML = `
-      <img src="${product.image}" alt="${product.name}">
-      <h3>${product.name}</h3>
-      <p>${translatePrice(product.price)}</p>
-      ${product.InStock ? `
-      <div class="quantity-selector">
+  <img src="${product.image}" alt="${product.name}">
+  <h3>${product.name}</h3>
+  <p>${translatePrice(product.price)}</p>
+  <div class="quantity-selector">
+    <button onclick="changeQuantity(${product.id}, -1)">-</button>
+    <span id="qty-${product.id}">1</span>
+    <button onclick="changeQuantity(${product.id}, 1)">+</button>
+  </div>
+  ${
+    product.InStock 
+    ? `<button class="add-cart" onclick="addToCart(${product.id})">🛒 ${currentLanguage === 'kh' ? 'បន្ថែម' : 'Add to Cart'}</button>`
+    : `<button class="out-of-stock" disabled>❌ ${currentLanguage === 'kh' ? 'អស់ពីស្តុក' : 'Out of Stock'}</button>`
+  }
+`;
         <button onclick="changeQuantity(${product.id}, -1)">-</button>
         <span id="qty-${product.id}">1</span>
         <button onclick="changeQuantity(${product.id}, 1)">+</button>
