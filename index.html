@@ -21,30 +21,10 @@
 
 <div class="total" id="total">TOTAL: $0.00 / ៛0</div>
 
-<!-- NEW -->
+<!-- Correct way -->
 <a href="checkout.html">
   <button id="finishOrder">Finish Order</button>
 </a>
-<!-- Checkout Modal -->
-<div id="checkoutModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="hideCheckout()">×</span>
-    <h2>Checkout List</h2>
-
-    <div id="checkoutItems" class="checkout-items"></div>
-
-    <div class="customer-info">
-      <input type="text" id="customerName" placeholder="Customer Name">
-      <input type="text" id="customerPhone" placeholder="Phone Number">
-      <input type="text" id="customerAddress" placeholder="Address">
-    </div>
-
-    <div style="margin-top: 15px;">
-      <button onclick="confirmOrder()" class="confirm-button">✓ Confirm Order</button>
-      <button onclick="hideCheckout()" class="cancel-button">✖ Cancel</button>
-    </div>
-  </div>
-</div>
 
 <script src="products.js"></script>
 <script src="script.js"></script>
