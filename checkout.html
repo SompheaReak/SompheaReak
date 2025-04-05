@@ -73,8 +73,7 @@ Date: ${new Date().toLocaleString()}
   sendOrderToTelegram(orderText);
   alert("✅ Order Sent Successfully!");
   localStorage.removeItem('cart');
-  window.location.href = "index.html"; // Back to homepage
-}
+  window.location.href = "/";
 
 function sendOrderToTelegram(text) {
   const botToken = "7743854740:AAHst9ZmDELrAcKChfcVpYpyGXF5sXTNSkY";  // <-- Your Bot Token
