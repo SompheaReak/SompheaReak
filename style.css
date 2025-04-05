@@ -1,21 +1,78 @@
+body {
+  font-family: 'Arial Black', sans-serif;
+  text-align: center;
+  background: white;
+  padding: 10px;
+}
+
+.settings {
+  margin-bottom: 20px;
+}
+
+.settings button {
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 18px;
+}
+
+.category-buttons {
+  margin-bottom: 20px;
+}
+
+.category-buttons button {
+  margin: 5px;
+  padding: 12px 20px;
+  font-size: 20px;
+}
+
+.products-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
 .product {
-  font-size: 18px; /* make everything inside bigger */
+  border: 2px solid black;
+  padding: 10px;
 }
 
-.product h3 {
-  font-size: 22px; /* product title bigger */
-  font-weight: bold;
-}
-
-.product p {
-  font-size: 18px; /* price text bigger */
-}
-
-button {
-  font-size: 18px; /* buttons text bigger */
-  padding: 8px 16px; /* make buttons a little fatter */
+.product img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
 }
 
 .quantity-selector {
-  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px 0;
+}
+
+.quantity-selector button {
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+}
+
+.quantity-selector span {
+  margin: 0 10px;
+  font-size: 20px;
+}
+
+.total {
+  margin-top: 20px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+#finishOrder {
+  margin-top: 15px;
+  padding: 15px;
+  font-size: 24px;
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  width: 100%;
 }
