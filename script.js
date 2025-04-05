@@ -129,3 +129,20 @@ function sendTelegramMessage(message) {
 
 // Load all products initially
 displayProducts();
+const exchangeRate = 4000; // 1 USD = 4000 KHR
+
+products.forEach(product => {
+    const productDiv = document.createElement('div');
+    productDiv.classList.add('product');
+
+    const priceInKHR = (product.price * exchangeRate).toLocaleString(); // ៛ format with commas
+
+    productDiv.innerHTML = `
+        <img src="${product.image}" alt="${product.name}" class="product-image">
+        <h3>${product.name}</h3>
+        <p>Price: $${product.price.toFixed(2)} / ៛${priceInKHR}</p>
+        <button onclick="addToCart(${product.id})">Add to Cart</button>
+    `;
+
+    productsContainer.appendChild(productDiv);
+});
