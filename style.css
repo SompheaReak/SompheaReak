@@ -10,9 +10,11 @@ body {
 }
 
 .settings button, .category-buttons button {
-  padding: 10px 20px;
+  padding: 12px 20px;
   margin: 5px;
   font-size: 18px;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
 .products-container {
@@ -54,29 +56,32 @@ body {
 .add-cart {
   margin-top: 10px;
   width: 100%;
-  padding: 10px;
-  font-size: 20px;
+  padding: 14px;
+  font-size: 22px;
   background-color: green;
   color: white;
   border: none;
   border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .total {
   margin-top: 20px;
-  font-size: 30px;
+  font-size: 32px;
   font-weight: bold;
 }
 
 #finishOrder {
   margin-top: 15px;
-  padding: 15px;
-  font-size: 24px;
+  padding: 18px;
+  font-size: 26px;
   background-color: green;
   color: white;
   border: none;
   border-radius: 8px;
   width: 100%;
+  font-weight: bold;
 }
 
 /* Checkout Modal */
@@ -84,7 +89,7 @@ body {
   display: none;
   position: fixed;
   z-index: 10;
-  padding-top: 100px;
+  padding-top: 80px;
   left: 0;
   top: 0;
   width: 100%;
@@ -96,27 +101,29 @@ body {
   background: white;
   margin: auto;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 12px;
   width: 90%;
   max-width: 500px;
+  position: relative;
 }
 
 .close {
   float: right;
-  font-size: 30px;
+  font-size: 32px;
   cursor: pointer;
 }
 
 .checkout-item {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .checkout-item img {
   width: 60px;
   height: 60px;
   margin-right: 10px;
+  border-radius: 8px;
 }
 
 .checkout-controls button {
@@ -125,21 +132,30 @@ body {
   padding: 5px;
 }
 
+.customer-info input {
+  width: 90%;
+  padding: 12px;
+  margin-top: 10px;
+  font-size: 18px;
+  border: 2px solid black;
+  border-radius: 8px;
+}
+
 .confirm {
   background-color: green;
   color: white;
-  padding: 10px 20px;
-  font-size: 18px;
+  padding: 12px 25px;
+  font-size: 20px;
   margin-right: 10px;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
 }
 
 .cancel {
   background-color: red;
   color: white;
-  padding: 10px 20px;
-  font-size: 18px;
+  padding: 12px 25px;
+  font-size: 20px;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
 }
