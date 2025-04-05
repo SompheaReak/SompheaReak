@@ -8,6 +8,8 @@
 </head>
 <body>
 
+<h1 class="title">SompheaReak</h1>
+
 <div class="settings">
   <button onclick="setColumns(2)">2 Columns</button>
   <button onclick="setColumns(3)">3 Columns</button>
@@ -15,16 +17,11 @@
   <button onclick="setLanguage('kh')">ភាសាខ្មែរ 🇰🇭</button>
 </div>
 
-<h1 id="title">Hot Sale / Jewelry / Toy</h1>
+<div id="categoryButtons" class="category-buttons"></div>
 
-<div class="category-buttons" id="categoryButtons"></div>
-<div class="products-container" id="products"></div>
+<div id="products" class="products-container"></div>
 
-<div class="total" id="total">TOTAL: $0.00 / ៛0</div>
-
-<a href="checkout.html">
-  <button id="finishOrder">Finish Order</button>
-</a>
+<div id="total" class="total">TOTAL: $0.00 / ៛0</div>
 
 <script src="products.js"></script>
 <script src="script.js"></script>
